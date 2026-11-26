@@ -26,18 +26,18 @@ class PaymentRequestSeeder extends Seeder
         $daniel = User::where('email', 'staff2@example.com')->firstOrFail();
 
         $rows = [
-            [$sara, 'Tenaga Nasional Berhad', 'TNB-2026-11-0381', 4820.55, 'bank_transfer', 14, 'November electricity bill – HQ.', 'approved', 12],
-            [$sara, 'Syarikat Air Selangor', 'SAS-778120', 612.40, 'duitnow', 10, null, 'approved', 9],
-            [$sara, 'Office Hub Supplies Sdn Bhd', 'OH-INV-20931', 1275.00, 'bank_transfer', 8, 'Stationery and printer toner for Q4.', 'rejected', 6],
-            [$sara, 'Klang Valley Movers', 'KVM-00412', 3500.00, 'cheque', 5, 'Office relocation – level 3 to level 5.', 'pending', 3],
-            [$sara, 'CloudNest Hosting', 'CN-2026-1187', 899.00, 'bank_transfer', 3, 'Annual VPS renewal.', 'pending', 1],
-            [$daniel, 'Maju Catering Services', 'MCS-5521', 2140.00, 'duitnow', 9, 'Town hall lunch, 85 pax.', 'approved', 7],
-            [$daniel, 'Prime Security Sdn Bhd', 'PS-11-2026', 7600.00, 'bank_transfer', 6, 'Guard services for November.', 'pending', 4],
-            [$daniel, 'Lim & Co. Printing', 'LCP-3390', 455.80, 'cheque', 4, 'Business cards – 6 staff.', 'rejected', 2],
-            [$daniel, 'Telekom Malaysia', 'TM-88213004', 389.00, 'duitnow', 2, null, 'pending', 0],
+            [$sara, 'Tenaga Nasional Berhad', 'TNB-2026-11-0381', 4820.55, 'bank_transfer', -1, 'November electricity bill – HQ.', 'approved', 12],
+            [$sara, 'Syarikat Air Selangor', 'SAS-778120', 612.40, 'duitnow', 3, null, 'approved', 9],
+            [$sara, 'Office Hub Supplies Sdn Bhd', 'OH-INV-20931', 1275.00, 'bank_transfer', 5, 'Stationery and printer toner for Q4.', 'rejected', 6],
+            [$sara, 'Klang Valley Movers', 'KVM-00412', 3500.00, 'cheque', 6, 'Office relocation – level 3 to level 5.', 'pending', 3],
+            [$sara, 'CloudNest Hosting', 'CN-2026-1187', 899.00, 'bank_transfer', 12, 'Annual VPS renewal.', 'pending', 1],
+            [$daniel, 'Maju Catering Services', 'MCS-5521', 2140.00, 'duitnow', 2, 'Town hall lunch, 85 pax.', 'approved', 7],
+            [$daniel, 'Prime Security Sdn Bhd', 'PS-11-2026', 7600.00, 'bank_transfer', 4, 'Guard services for November.', 'pending', 4],
+            [$daniel, 'Lim & Co. Printing', 'LCP-3390', 455.80, 'cheque', 9, 'Business cards – 6 staff.', 'rejected', 2],
+            [$daniel, 'Telekom Malaysia', 'TM-88213004', 389.00, 'duitnow', 15, null, 'pending', 0],
         ];
 
-        foreach ($rows as [$owner, $vendor, $invoice, $amount, $method, $dueInDays, $remarks, $status, $daysAgo]) {
+        foreach ($rows as [$owner, $vendor, $invoice, $amount, $method, $paymentInDays, $remarks, $status, $daysAgo]) {
             $createdAt = Carbon::now()->subDays($daysAgo)->setTime(9, 15);
 
             $request = new PaymentRequest([
@@ -45,7 +45,7 @@ class PaymentRequestSeeder extends Seeder
                 'invoice_number' => $invoice,
                 'amount' => $amount,
                 'payment_method' => $method,
-                'payment_date' => $createdAt->copy()->addDays($dueInDays)->toDateString(),
+                'payment_date' => Carbon::today()->addDays($paymentInDays)->toDateString(),
                 'remarks' => $remarks,
             ]);
             $request->user_id = $owner->id;
