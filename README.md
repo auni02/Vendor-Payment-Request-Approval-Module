@@ -6,7 +6,7 @@ A small Laravel application for an internal business system. Staff submit vendor
 
 ## Demo video
 
-▶ **[Watch the 4-minute walkthrough](DEMO_VIDEO_LINK)**. It covers staff submitting a request, the approver approving one request and rejecting another with a reason, the audit trail, search and filters, and the role restrictions.
+▶ **[Watch the 4-minute walkthrough](https://drive.google.com/drive/folders/1JP9z8qehMkHLx558CwFl5ofII3SCJnCE?usp=sharing)**. It covers staff submitting a request, the approver approving one request and rejecting another with a reason, the audit trail, search and filters, and the role restrictions.
 
 ## Contents
 
