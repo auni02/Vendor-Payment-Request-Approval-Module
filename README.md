@@ -4,8 +4,13 @@ A small Laravel application for an internal business system. Staff submit vendor
 
 ![Approver dashboard](docs/screenshots/05-approver-dashboard.png)
 
+## Demo video
+
+▶ **[Watch the 4-minute walkthrough](DEMO_VIDEO_LINK)**. It covers staff submitting a request, the approver approving one request and rejecting another with a reason, the audit trail, search and filters, and the role restrictions.
+
 ## Contents
 
+- [Demo video](#demo-video)
 - [Features](#features)
 - [Tech stack](#tech-stack)
 - [Setup](#setup)
