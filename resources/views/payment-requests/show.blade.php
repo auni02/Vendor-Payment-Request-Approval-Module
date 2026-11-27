@@ -5,6 +5,7 @@
 @section('content')
     <div class="page-head">
         <div>
+            <span class="eyebrow">Payment request</span>
             <h1>{{ $paymentRequest->reference }} <x-status-badge :status="$paymentRequest->status" /></h1>
             <p>{{ $paymentRequest->vendor_name }} · submitted by {{ $paymentRequest->requester->name }} on {{ $paymentRequest->created_at->format('d M Y, g:i A') }}</p>
         </div>
@@ -32,7 +33,8 @@
                     </div>
                 @endif
 
-                <dl class="details">
+                <h2>Details</h2>
+                <dl class="details inset">
                     <dt>Amount</dt>
                     <dd class="amount-lg">RM {{ number_format($paymentRequest->amount, 2) }}</dd>
                     <dt>Vendor name</dt>
@@ -61,12 +63,12 @@
             @can('review', $paymentRequest)
                 <section class="card">
                     <h2>Review</h2>
-                    <div class="grid-2" style="grid-template-columns: 1fr 1fr">
-                        <form method="POST" action="{{ route('payment-requests.approve', $paymentRequest) }}"
+                    <div class="review-grid">
+                        <form class="approve-box" method="POST" action="{{ route('payment-requests.approve', $paymentRequest) }}"
                               onsubmit="return confirm('Approve {{ $paymentRequest->reference }} for RM {{ number_format($paymentRequest->amount, 2) }}?')">
                             @csrf
                             <input type="hidden" name="version" value="{{ $version }}">
-                            <p class="meta" style="margin-top:0">Approve this payment for RM {{ number_format($paymentRequest->amount, 2) }} to {{ $paymentRequest->vendor_name }}.</p>
+                            <p>Approve this payment for RM {{ number_format($paymentRequest->amount, 2) }} to {{ $paymentRequest->vendor_name }}.</p>
                             <button type="submit" class="btn btn-success btn-block">Approve</button>
                         </form>
 
@@ -85,12 +87,12 @@
             @endcan
         </div>
 
-        <aside class="card">
+        <aside class="card card-dark">
             <h2>Audit trail</h2>
             <ul class="timeline">
                 @foreach ($paymentRequest->activities as $activity)
                     <li class="{{ $activity->action->value }}">
-                        <div><strong>{{ $activity->action->label() }}</strong> by {{ $activity->user->name }}
+                        <div class="who"><strong>{{ $activity->action->label() }}</strong> by {{ $activity->user->name }}
                             <span class="meta">({{ $activity->user->role->label() }})</span></div>
                         <div class="when" title="{{ $activity->created_at->toIso8601String() }}">
                             {{ $activity->created_at->format('d M Y, g:i:s A') }} · {{ $activity->created_at->diffForHumans() }}

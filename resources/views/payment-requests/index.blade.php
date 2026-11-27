@@ -5,6 +5,7 @@
 @section('content')
     <div class="page-head">
         <div>
+            <span class="eyebrow">Overview</span>
             <h1>Payment requests</h1>
             <p>{{ auth()->user()->isApprover() ? 'All vendor payment requests across the organisation.' : 'Your vendor payment requests.' }}</p>
         </div>
@@ -26,10 +27,14 @@
     </section>
 
     <section class="card">
+        <h2>Find a request</h2>
         <form method="GET" action="{{ route('dashboard') }}" class="filters" role="search">
             <div class="field search">
                 <label for="q">Search</label>
-                <input type="search" id="q" name="q" value="{{ $filters['q'] ?? '' }}" placeholder="Vendor or invoice number" maxlength="100">
+                <div class="search-field">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>
+                    <input type="search" id="q" name="q" value="{{ $filters['q'] ?? '' }}" placeholder="Vendor or invoice number" maxlength="100">
+                </div>
             </div>
             <div class="field">
                 <label for="status">Status</label>
@@ -61,7 +66,7 @@
             </div>
         </form>
         @if ($filterErrors->any())
-            <div class="alert alert-error" style="margin: 1rem 0 0">
+            <div class="alert alert-error" style="margin: 1.1rem 0 0">
                 Some filters were ignored:
                 <ul>@foreach ($filterErrors->all() as $error)<li>{{ $error }}</li>@endforeach</ul>
             </div>
@@ -69,7 +74,8 @@
     </section>
 
     <section class="card">
-        <div class="table-wrap">
+        <h2>All requests</h2>
+        <div class="table-wrap inset">
             <table class="responsive">
                 <thead>
                 <tr>
@@ -86,7 +92,7 @@
                 <tbody>
                 @forelse ($requests as $request)
                     <tr>
-                        <td data-label="Reference"><a href="{{ route('payment-requests.show', $request) }}">{{ $request->reference }}</a></td>
+                        <td data-label="Reference"><a href="{{ route('payment-requests.show', $request) }}" class="ref-link"><span class="chev" aria-hidden="true">&rarr;</span>{{ $request->reference }}</a></td>
                         <td data-label="Vendor">{{ $request->vendor_name }}</td>
                         <td data-label="Invoice no.">{{ $request->invoice_number }}</td>
                         <td data-label="Amount (RM)" class="num">{{ number_format($request->amount, 2) }}</td>
