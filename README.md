@@ -40,9 +40,9 @@ A small Laravel application for an internal business system. Staff submit vendor
 
 ## Tech stack
 
-- **PHP 8.3+**, **Laravel 13** (meets the "Laravel 10 or above" requirement)
-- **MySQL 8 / MariaDB 10.6+** (SQLite also works and is used by the test suite)
-- Blade templates with one hand-written CSS file (`public/css/app.css`). There is **no Node/Vite build step**
+- **PHP 8.3+**, **Laravel 13** 
+- **MySQL 8 / MariaDB 10.6+** (
+- There is **no Node/Vite build step**
 - PHPUnit feature tests
 
 ## Setup
@@ -70,9 +70,6 @@ To reset the demo data at any time, run:
 ```bash
 php artisan migrate:fresh --seed
 ```
-
-> You **don't** need to run `php artisan storage:link`. Attachments are intentionally not on the public disk.
-
 ## Database configuration
 
 Create an empty database and a user:
