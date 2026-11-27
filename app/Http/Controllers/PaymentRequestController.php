@@ -46,8 +46,11 @@ class PaymentRequestController extends Controller
             ->paginate(15)
             ->withQueryString();
 
+        $latest = PaymentRequest::visibleTo($user)->with('requester:id,name')->latest()->latest('id')->first();
+
         return view('payment-requests.index', [
             'stats' => $stats,
+            'latest' => $latest,
             'requests' => $requests,
             'filters' => $filters,
             'filterErrors' => $filterErrors,

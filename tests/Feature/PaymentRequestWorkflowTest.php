@@ -231,6 +231,6 @@ class PaymentRequestWorkflowTest extends TestCase
 
         $this->actingAs($staff)->get(route('payment-requests.show', $request))
             ->assertOk()
-            ->assertSeeInOrder(['Audit trail', 'Approved', 'Aina Approver', 'Created', 'Sara Staff']);
+            ->assertSeeInOrder(['Audit trail', 'Aina Approver', 'Approved', 'Sara Staff', 'Created']);
     }
 }

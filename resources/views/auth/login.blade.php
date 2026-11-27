@@ -3,21 +3,28 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="theme-color" content="#a35c69">
+    <meta name="theme-color" content="#e64980">
     <title>Log in · {{ config('app.name') }}</title>
-    <link rel="stylesheet" href="{{ asset('css/app.css') }}?v=3">
+    <link rel="stylesheet" href="{{ asset('css/app.css') }}?v=5">
 </head>
 <body>
-<div class="auth-wrap">
-    <div class="auth-card">
-        <div class="auth-hero">
-            <span class="eyebrow">Internal finance · Approval module</span>
-            <span class="brand-title">Vendor<br>Payments</span>
-            <span class="sub">Submit · Review · Approve</span>
-        </div>
+<div class="auth-page">
+    <div class="auth-split">
+        <section class="auth-brand">
+            <div class="logo">VP</div>
+            <h1>Vendor Payments</h1>
+            <p>Submit vendor payment requests and get them reviewed by an approver, with every step on record.</p>
+            <ul>
+                <li>Bank Transfer, DuitNow &amp; Cheque</li>
+                <li>Approve or reject with a reason</li>
+                <li>Full audit trail</li>
+            </ul>
+        </section>
 
-        <div class="card">
-            <h2>Sign in</h2>
+        <section class="auth-form">
+            <h2>Welcome back</h2>
+            <p class="lead">Sign in to your account to continue.</p>
+
             @if (session('status'))
                 <div class="alert alert-info">{{ session('status') }}</div>
             @endif
@@ -37,7 +44,7 @@
                 <div class="field">
                     <label class="checkbox"><input type="checkbox" name="remember" value="1"> Remember me</label>
                 </div>
-                <button type="submit" class="btn btn-primary btn-block">Log in <span class="arrow">&rarr;</span></button>
+                <button type="submit" class="btn btn-primary btn-block">Log in</button>
             </form>
 
             @if (app()->environment('local'))
@@ -47,9 +54,8 @@
                     Staff: <code>staff@example.com</code>, <code>staff2@example.com</code>
                 </div>
             @endif
-        </div>
+        </section>
     </div>
-    <div class="footer">Vendor Payments · Internal use only</div>
 </div>
 </body>
 </html>
